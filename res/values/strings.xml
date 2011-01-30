@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Resizoid</string>
+    <string name="btn_main">Verkleinern</string>
+    <string name="main_pick_picture">Bild auswählen:</string>
+    <string name="main_pick_size">Größe auswählen:</string>
+</resources>

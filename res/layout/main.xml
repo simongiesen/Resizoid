@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <TextView
+		android:id="@+id/textView1" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		android:text="@string/main_pick_picture" />
+		
+    <ImageButton
+		android:layout_height="wrap_content"
+		android:layout_width="250px" 
+		android:id="@+id/imageButton1" 
+		android:src="@android:drawable/ic_menu_gallery" 
+		android:layout_gravity="center" 
+		android:scaleType="center" 
+		android:onClick="selectPictureFromGallery" />
+    
+    <TextView 
+    	android:id="@+id/textView2" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content" 
+    	android:text="@string/main_pick_size" />  
+    	  
+    <Spinner 
+    	android:layout_height="wrap_content" 
+    	android:id="@+id/spinner1" 
+    	android:layout_width="fill_parent" 
+    	android:drawSelectorOnTop="true" 
+    	android:entries="@array/size_key" 
+    	android:entryValues="@array/size_value" />
+    	
+    <Button 
+    	android:id="@+id/button1" 
+    	android:layout_width="fill_parent" 
+    	android:text="@string/btn_main" 
+    	android:layout_height="wrap_content" 
+    	android:onClick="resize"/>
+    
+    
+    
+</LinearLayout>

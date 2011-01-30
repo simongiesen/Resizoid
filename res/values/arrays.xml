@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<array name="size_key">
+		<item>Klein</item>
+		<item>Mittel</item>
+		<item>Groß</item>
+	</array>
+	<array name="size_value">
+		<item>S</item>
+		<item>M</item>
+		<item>L</item>
+	</array>
+</resources>

@@ -6,7 +6,9 @@
 package de.xgerdax.resizoid;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -18,6 +20,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView.ScaleType;
@@ -37,9 +40,14 @@ public class ResizoidFrame extends Activity {
 	static final int SELECT_IMAGE = 0;
 
 	/**
+	 * Identifier for the Settings Menu Button.
+	 */
+	public static final int SETTINGS_ID = Menu.FIRST;
+
+	/**
 	 * Identifier for the About Menu Button.
 	 */
-	public static final int ABOUT_ID = Menu.FIRST;
+	public static final int ABOUT_ID = Menu.NONE;
 
 	/**
 	 * Called when the activity is first created.
@@ -104,7 +112,6 @@ public class ResizoidFrame extends Activity {
 				int width = yourSelectedImage.getWidth();
 				int height = yourSelectedImage.getHeight();
 				int newWidth = imageButton1.getWidth();
-				int newHeight = imageButton1.getHeight();
 
 				// calculate the scale
 				float factor = ((float) newWidth) / width;
@@ -142,10 +149,47 @@ public class ResizoidFrame extends Activity {
 	 */
 	@Override
 	public final boolean onCreateOptionsMenu(final Menu menu) {
+		// Settings Item with Icon
+		menu.add(0, SETTINGS_ID, Menu.NONE, "Einstellungen").setIcon(
+				android.R.drawable.ic_menu_preferences);
 		// About Item with Icon
 		menu.add(0, ABOUT_ID, Menu.NONE, "Über").setIcon(
 				android.R.drawable.ic_menu_info_details);
 		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public final boolean onOptionsItemSelected(final MenuItem item) {
+
+		switch (item.getItemId()) {
+
+		case SETTINGS_ID:
+
+			Intent i = new Intent(this, ResizoidSettingsFrame.class);
+			startActivity(i);
+
+			break;
+
+		case ABOUT_ID:
+
+			AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+			alertDialog.setTitle("About");
+			alertDialog.setMessage("Autor: xge");
+			alertDialog.setIcon(android.R.drawable.ic_dialog_info);
+			alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+				public void onClick(final DialogInterface dialog, final int which) {
+					return;
+				}
+			});
+			alertDialog.show();
+
+			break;
+
+		default:
+
+		}
+
+		return super.onOptionsItemSelected(item);
 	}
 
 	/**
@@ -157,7 +201,7 @@ public class ResizoidFrame extends Activity {
 	public final void resize(final View view) {
 
 		Context context = getApplicationContext();
-		CharSequence text = "Hello toast!";
+		CharSequence text = "Bild erfolgreich verkleinert!";
 		int duration = Toast.LENGTH_SHORT;
 
 		Log.i("Resizoid", "Now I call the Toast!");

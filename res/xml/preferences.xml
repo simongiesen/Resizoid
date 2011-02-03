@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+        <PreferenceCategory
+                android:title="Speicherort">
+        <EditTextPreference
+                android:summary="Standard Speicherort für verkleinerte Bilder"
+                android:defaultValue="/sdcard/Resizoid/"
+                android:title="Speicherort"
+                android:key="speicherortPref" />
+        </PreferenceCategory>
+</PreferenceScreen>

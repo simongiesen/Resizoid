@@ -1,57 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
-    
-    <ScrollView 
-    	android:layout_width="fill_parent" 
-    	android:id="@+id/scrollView1" 
-    	android:layout_height="wrap_content" >
-    	
-        <LinearLayout 
-	        android:layout_width="fill_parent" 
-	        android:id="@+id/linearLayout1" 
-	        android:layout_height="fill_parent"
-	    	android:orientation="vertical" >
-	    	
-		    <TextView
-				android:id="@+id/textView1" 
-				android:layout_width="wrap_content" 
-				android:layout_height="wrap_content" 
-				android:text="@string/main_pick_picture" />
-				
-		    <ImageButton
-				android:layout_height="wrap_content"
-				android:layout_width="250px" 
-				android:id="@+id/imageButton1" 
-				android:src="@android:drawable/ic_menu_gallery" 
-				android:layout_gravity="center" 
-				android:scaleType="center" 
-				android:onClick="selectPictureFromGallery" />
-		    
-		    <TextView 
-		    	android:id="@+id/textView2" 
-		    	android:layout_width="wrap_content" 
-		    	android:layout_height="wrap_content" 
-		    	android:text="@string/main_pick_size" />  
-		    	  
-		    <Spinner 
-		    	android:layout_height="wrap_content" 
-		    	android:id="@+id/spinner1" 
-		    	android:layout_width="fill_parent" 
-		    	android:drawSelectorOnTop="true" 
-		    	android:entries="@array/size_key" 
-		    	android:entryValues="@array/size_value" />
-		    	
-		    <Button 
-		    	android:id="@+id/button1" 
-		    	android:layout_width="fill_parent" 
-		    	android:text="@string/btn_main" 
-		    	android:layout_height="wrap_content" 
-		    	android:onClick="resize"/>
-    
-    	</LinearLayout>
-    </ScrollView>
-    
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<ScrollView android:layout_width="fill_parent" android:id="@+id/scrollView1"
+		android:layout_height="wrap_content">
+
+		<LinearLayout android:layout_width="fill_parent"
+			android:id="@+id/linearLayout1" android:layout_height="fill_parent"
+			android:orientation="vertical">
+
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="@string/main_pick_picture"
+				android:id="@+id/text_pickimage" />
+
+			<Button android:layout_height="wrap_content"
+				android:layout_width="fill_parent" android:id="@+id/btn_pickimage"
+				android:text="@string/btn_pickimg" android:onClick="selectPictureFromGallery"></Button>
+
+			<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+				android:src="@android:drawable/divider_horizontal_dark"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:scaleType="fitXY" android:paddingLeft="5dp"
+				android:paddingRight="5dp" android:paddingBottom="2dp"
+				android:paddingTop="2dp" />
+
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/text_sizes"
+				android:text="@string/main_pick_size" />
+
+			<Spinner android:layout_height="wrap_content"
+				android:layout_width="fill_parent" android:drawSelectorOnTop="true"
+				android:entries="@array/size_key" android:entryValues="@array/size_value"
+				android:id="@+id/spin_sizes" />
+
+			<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+				android:src="@android:drawable/divider_horizontal_dark"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:scaleType="fitXY" android:paddingLeft="5dp"
+				android:paddingRight="5dp" android:paddingBottom="2dp"
+				android:paddingTop="2dp" />
+
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="@string/main_caption_result"
+				android:id="@+id/text_main" />
+
+			<Button android:layout_width="fill_parent" android:text="@string/btn_main"
+				android:layout_height="wrap_content" android:onClick="resize"
+				android:id="@+id/btn_main" android:enabled="false"/>
+
+			<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+				android:src="@android:drawable/divider_horizontal_dark"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:scaleType="fitXY" android:paddingLeft="5dp"
+				android:paddingRight="5dp" android:paddingBottom="2dp"
+				android:paddingTop="2dp" />
+
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/text_details"
+				android:text="@string/text_details" />
+
+			<LinearLayout android:id="@+id/linearLayout2"
+				android:layout_height="wrap_content" android:layout_width="fill_parent">
+
+				<ImageView android:layout_height="wrap_content"
+					android:src="@android:drawable/ic_menu_gallery"
+					android:layout_width="100dp" android:id="@+id/img_preview"
+					android:adjustViewBounds="true" android:background="@color/img_previewBackground"
+					android:padding="2dp"></ImageView>
+
+				<LinearLayout android:id="@+id/linearLayout3"
+					android:layout_width="wrap_content" android:orientation="vertical"
+					android:layout_height="wrap_content" android:layout_marginLeft="5dp">
+
+					<TextView android:id="@+id/details_filename"
+						android:layout_height="wrap_content" android:layout_width="wrap_content"
+						android:text="@string/details_filename" android:textAppearance="@style/detailsText"></TextView>
+
+					<TextView android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:id="@+id/details_filesize"
+						android:text="@string/details_filesize" android:textAppearance="@style/detailsText"></TextView>
+
+					<TextView android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:id="@+id/details_picsize"
+						android:text="@string/details_picsize" android:textAppearance="@style/detailsText"></TextView>
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</LinearLayout>
+	</ScrollView>
+
 </LinearLayout>

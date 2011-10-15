@@ -4,4 +4,10 @@
     <string name="btn_main">Verkleinern</string>
     <string name="main_pick_picture">Bild auswählen:</string>
     <string name="main_pick_size">Größe auswählen:</string>
+    <string name="main_caption_result">Bestätigen</string>
+    <string name="details_filename">Dateiname</string>
+    <string name="details_filesize">Dateigröße in kb</string>
+    <string name="details_picsize">Höhe x Breite in px</string>
+    <string name="btn_pickimg">Bild auswählen</string>
+    <string name="text_details">Gewähltes Bild</string>
 </resources>

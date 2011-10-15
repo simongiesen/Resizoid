@@ -3,11 +3,11 @@
 	<array name="size_key">
 		<item>Klein</item>
 		<item>Mittel</item>
-		<item>Groß</item>
+		<item>Riesig</item>
 	</array>
 	<array name="size_value">
-		<item>S</item>
-		<item>M</item>
-		<item>L</item>
+		<item>600</item>
+		<item>1024</item>
+		<item>1920</item>
 	</array>
 </resources>

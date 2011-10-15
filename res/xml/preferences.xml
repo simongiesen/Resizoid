@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-        <PreferenceCategory
-                android:title="Speicherort">
-        <EditTextPreference
-                android:summary="Standard Speicherort für verkleinerte Bilder"
-                android:defaultValue="/sdcard/Resizoid/"
-                android:title="Speicherort"
-                android:key="speicherortPref" />
-        </PreferenceCategory>
+	<PreferenceCategory android:title="Speicherort">
+		<EditTextPreference android:title="Speicherort"
+			android:defaultValue="/Resizoid" android:summary="Standard Speicherort auf der SD-Karte für verkleinerte Bilder"
+			android:key="speicherortPref" />
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Größenangaben">
+		<EditTextPreference android:title="Klein"
+			android:defaultValue="600" android:summary="Breite in Pixel"
+			android:key="sizeSmallPref"></EditTextPreference>
+		<EditTextPreference android:title="Mittel"
+			android:defaultValue="1024" android:summary="Breite in Pixel"
+			android:key="sizeMediumPref"></EditTextPreference>
+		<EditTextPreference android:title="Groß"
+			android:defaultValue="1280" android:summary="Breite in Pixel"
+			android:key="sizeLargePref"></EditTextPreference>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Diverses">
+		<CheckBoxPreference android:key="checkOpenGallery"
+			android:summary="Nach Abschluss das Bild in der Galerie öffnen?"
+			android:title="Öffnen" android:defaultValue="false" />
+	</PreferenceCategory>
 </PreferenceScreen>

@@ -6,7 +6,6 @@ package de.xgerdax;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -80,10 +79,7 @@ public class ResizoidActivity extends Activity {
      */
     private static String selectedFileName;
 
-    /**
-     * These Chars must not appear in the filename!
-     */
-    private static final String reservedChars = "|\\?*<\":>+[]/'";
+    private static final String TAG = "Resizoid";
 
     /**
      * Called when the activity is first created.
@@ -104,7 +100,7 @@ public class ResizoidActivity extends Activity {
      *            The View we come from
      */
     public final void selectPictureFromGallery(final View view) {
-        Log.i("Resizoid", "Button pressed");
+        Log.i(TAG, "Button pressed");
         startActivityForResult(new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), SELECT_IMAGE);
     }
@@ -155,7 +151,7 @@ public class ResizoidActivity extends Activity {
                 details_filename.setText(cursor.getString(columnIndex));
 
                 // Do some logging and finally close the Cursor
-                Log.i("Resizoid", "filePath: " + filePath + " fileSize: " + fileSize + " fileName: " + selectedFileName);
+                Log.i(TAG, "filePath: " + filePath + " fileSize: " + fileSize + " fileName: " + selectedFileName);
                 cursor.close();
 
                 // Now set the Image
@@ -277,30 +273,44 @@ public class ResizoidActivity extends Activity {
      *             If there's something wrong with the OutputStream.
      */
     public final void saveToDisk(final Bitmap img) throws IOException {
+        // get the user defined path from the settings
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        String userDefinedPath = prefs.getString("speicherortPref", "/Resizoid");
+
+        // create the actual file path (with a fallback)
         String path = Environment.getExternalStorageDirectory().toString();
+
+        String userDefinedPath = prefs.getString("speicherortPref", "/Resizoid");
+
+        // Make sure there's a slash between the directories
+        path += (!userDefinedPath.substring(0, 1).equals("/")) ? "/" : "";
+
         path += userDefinedPath;
-        path += "/" + selectedFileName + "-" + img.getWidth() + ".jpg";
-        Log.i("Resizoid", "path: " + path);
-        File file = new File(path);
+
+        Log.i(TAG, "path: " + path);
+
+        // finally create the file
+        File file = new File(path, selectedFileName + "-" + img.getWidth() + ".jpg");
 
         try {
-            if (file.mkdir()) {
-                Log.i("Resizoid", "Anlegen des Verzeichnisses hat geklappt!");
-            } else {
-                Log.i("Resizoid", "Anlegen des Verzeichnisses gescheitert!");
-            }
+            // test whether its possible to write at the exact location
+            file.mkdirs();
         } catch (SecurityException e) {
-            Log.i("Resizoid", "Anlegen des Verzeichnisses gescheitert!, e: " + e.getMessage());
+            Log.i(TAG, "Anlegen des Verzeichnisses gescheitert!, e: " + e.getMessage());
         }
 
-        OutputStream fOut = new FileOutputStream(file);
+        Log.i(TAG, "Anlegen des Verzeichnisses hat geklappt!");
+
+        // do the actual writing
+        FileOutputStream fOut = new FileOutputStream(file);
         img.compress(Bitmap.CompressFormat.JPEG, JPEG_COMPRESSION, fOut);
         fOut.flush();
         fOut.close();
+        Log.i(TAG, "FileOutput is done and closed!");
+
+        // put the new image in the gallery
         MediaStore.Images.Media.insertImage(getContentResolver(), file.getAbsolutePath(), file.getName(),
                 file.getName());
+        Log.i(TAG, "MediaStore is done!");
     }
 
     /**
@@ -313,7 +323,6 @@ public class ResizoidActivity extends Activity {
 
         Spinner s = (Spinner) findViewById(R.id.spin_sizes);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        int[] values = getResources().getIntArray(R.array.size_value);
 
         // Based on the selected size we have to get the preference's value
         int size;
@@ -331,10 +340,10 @@ public class ResizoidActivity extends Activity {
             size = DEFAULT_WIDTH;
         }
 
-        Log.i("Resizoid", "size: " + size);
+        Log.i(TAG, "size: " + size);
         Bitmap resizedImg = resizeSelectedImage(size);
-        Log.i("Resizoid", "Bitmap Hšhe: " + resizedImg.getHeight() + " Bitmap Breite: " + resizedImg.getWidth()
-                + " Item: " + s.getSelectedItem().toString());
+        Log.i(TAG, "Bitmap Hšhe: " + resizedImg.getHeight() + " Bitmap Breite: " + resizedImg.getWidth() + " Item: "
+                + s.getSelectedItem().toString());
 
         try {
             saveToDisk(resizedImg);
@@ -344,7 +353,7 @@ public class ResizoidActivity extends Activity {
             Toast.makeText(context, text, duration).show();
 
         } catch (IOException e) {
-            Log.i("Resizoid", "Could not write File " + e.getMessage());
+            Log.i(TAG, "Could not write File " + e.getMessage());
         }
     }
 
